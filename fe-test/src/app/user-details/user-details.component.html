@@ -1,3 +1,31 @@
-<p>
-  user-details works!
-</p>
+<div class="container">
+  <div class="row details">
+      <span class="col-12">
+          <a class="clr-white" routerLink="/home" routerLinkActive="active">Go Back</a>
+      </span>
+    </div>
+  <div class="row details">
+    <span class="col-2">ID :</span>
+    <span class="col-10">{{user.id}}</span>
+  </div>
+  <div class="row details">
+    <span class="col-2">First Name :</span>
+    <span class="col-10">{{user.firstName}}</span>
+  </div>
+  <div class="row details">
+    <span class="col-2">Last Name :</span>
+    <span class="col-10">{{user.lastName}}</span>
+  </div>
+  <div class="row details">
+    <span class="col-2">Email :</span>
+    <span class="col-10">{{user.email}}</span>
+  </div>
+  <div class="row details">
+    <span class="col-2">Country :</span>
+    <span class="col-10">{{user.country}}</span>
+  </div>
+  <div class="row details">
+    <span class="col-2">Date Of Birth :</span>
+    <span class="col-10">{{user.dateOfBirth | date:'longDate'}}</span>
+  </div>
+</div>

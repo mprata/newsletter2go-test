@@ -57,3 +57,11 @@ ngbd-table-complete span.ngb-highlight {
   pointer-events: none;
   color: #aaa;
 }
+
+.tb-actions {
+  cursor: pointer;
+}
+
+.tb-left {
+  padding-left: 0.5rem;
+}

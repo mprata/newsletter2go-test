@@ -1,0 +1,19 @@
+.details {
+  background: rgba(0, 0, 0, .05);
+  line-height: 3rem;
+}
+.clr-white {
+    color:black;
+}
+
+a:link, a:visited {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+a:hover, a:active {
+  color: #17a2b8!important;
+  cursor: pointer;
+}

@@ -59,27 +59,30 @@ export class UserService {
 
   constructor(public _http: HttpClient, private pipe: TitleCasePipe) {
     //Here we can replace the url later when we are loading user data from backend
-
-    this._http.get("../../assets/data/users.json")
+    this.getUsers()
       .subscribe((data) => {
         this.USERS = data;
-        this._search$.pipe(
-          tap(() => this._loading$.next(true)),
-          debounceTime(200),
-          switchMap(() => this._search()),
-          delay(200),
-          tap(() => this._loading$.next(false))
-        ).subscribe(result => {
-          this._users$.next(result.users);
-          this._total$.next(result.total);
-        });
-
-        this._search$.next();
+        this.load();
       },
         (error: any) => {
           console.error(error);
           return 'Server error';
         })
+  }
+
+  private load() {
+    this._search$.pipe(
+      tap(() => this._loading$.next(true)),
+      debounceTime(200),
+      switchMap(() => this._search()),
+      delay(200),
+      tap(() => this._loading$.next(false))
+    ).subscribe(result => {
+      this._users$.next(result.users);
+      this._total$.next(result.total);
+    });
+
+    this._search$.next();
   }
 
   get users$() { return this._users$.asObservable(); }
@@ -113,5 +116,28 @@ export class UserService {
     // 3. paginate
     users = users.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({ users, total });
+  }
+
+  getUsers(): Observable<any> {
+    return this._http.get("../../assets/data/users.json");
+  }
+
+  getUser(id: number){
+    if(this.USERS){
+      let user = this.USERS.find(i => i.id === id);
+      return user;
+    }
+  }
+
+  deleteUser(user: User) {
+    this.USERS = this.USERS.filter(i => i.id !== user.id);
+    this.load();
+  }
+
+  multiDelete(aUsers: Array<User>) {
+    aUsers.forEach(value => {
+      this.USERS = this.USERS.filter(i => i.id !== value.id);
+    })
+    this.load();
   }
 }
