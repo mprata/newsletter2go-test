@@ -12,7 +12,7 @@ import { UserService } from '../services/users.service';
   providers: [UserService, TitleCasePipe]
 })
 export class UserDetailsComponent implements OnInit {
-  private user: User;
+  public user: User;
 
   constructor(private route: ActivatedRoute, private service: UserService, private location: Location) {
   }
